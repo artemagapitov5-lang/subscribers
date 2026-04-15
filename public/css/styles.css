@@ -1,0 +1,864 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+ }
+ 
+ body {
+     min-height: 100vh;
+     background: white;
+ }
+
+ #equipment-table thead th {
+     background-image: none !important;   /* убираем стрелки сортировки */
+     text-indent: 0 !important;           /* сброс отступов, если они есть */
+ }
+
+ #equipment-table thead th::after {
+     display: none !important;            /* убираем псевдоэлементы стрелок */
+ }
+
+ #equipment-table thead th.sorting,
+ #equipment-table thead th.sorting_asc,
+ #equipment-table thead th.sorting_desc {
+     background: none !important;         /* полностью убираем фон */
+ }
+ 
+ .container {
+     padding: 0;
+     max-width: none;
+     margin: 0; 
+     width: 100%;
+     font-size: 12px !important;
+ }
+ 
+ .logo {
+     position: absolute;
+     top: 20px;
+     left: 20px;
+ }
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: #ffffff; /* однотонный фон без зелёной полоски */
+}
+
+.logo-time {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* базовое расстояние между логотипом и блоком */
+}
+
+.server-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 200px; /* сдвиг блока с часами и погодой правее на 100px */
+}
+
+.server-date {
+    font-weight: 700;
+    font-size: 20px;
+    color: #1f2933;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-icon {
+    font-size: 14px;
+}
+
+.server-time {
+    font-weight: 700;
+    font-size: 20px;
+    color: #1f2933;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-icon {
+    font-size: 14px;
+}
+
+.header-actions {
+    margin-left: auto;
+}
+
+.weather {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #374151;
+}
+
+.weather #weather-icon {
+    font-size: 14px;
+}
+
+.logo-block img {
+    height: 100px;
+}
+
+.btn-group {
+    display: inline-flex;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f3f4f6;
+    right: 600px;
+}
+
+.btn-group .btn {
+    border: none;
+    background: transparent;
+    padding: 10px 18px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.btn-group .btn:hover {
+    background: #0f6e02;
+    color: #ffffff;
+}
+
+.btn-group .btn.active {
+    background: linear-gradient(135deg, #3b82f6, #0f6e02);
+    color: #fff;
+}
+ 
+ .btn-success {
+     background: transparent;
+     color: #000000;
+     border: none;
+     border-radius: 8px;
+     position: absolute;
+     right: 60px;
+     top: 40px;
+     font-size: 14px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     padding: 5px 10px;
+ }
+ 
+ .btn-success:hover {
+     background-color: #08991493;
+     box-shadow: 0 8px 17px rgba(0,0,0,0.2);
+     transform: translateY(-2px);
+ }
+ .row-active {
+    background-color: #f5f5f5 !important;
+}
+.actions-inline-row td {
+    background-color: #fafafa;
+    border-top: none;
+    border-bottom: 2px solid #ddd;
+}
+.actions-inline button {
+    margin: 2px;
+}
+
+ .btn-success:active {
+     transform: translateY(1px);
+ }
+ 
+ .btn-add {
+     background: transparent;
+     color: hsl(0, 0%, 0%); /* Изменено с #fff на #000000 для видимости */
+     border: none;
+     border-radius: 8px;
+     position: absolute;
+     right: 200px;
+     top: 60px;
+     font-size: 20px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     padding: 5px 10px;
+ }
+ 
+ .btn-add:hover {
+     background-color: #4a4e4d79;
+     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+     transform: translateY(-2px);
+ }
+
+ .btn-filter {
+    background: transparent;
+    color: hsl(0, 0%, 0%); /* Изменено с #fff на #000000 для видимости */
+    border: none;
+    border-radius: 8px;
+    position: absolute;
+    right: 160px;
+    top: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+}
+
+.btn-filter:hover {
+    background-color: #4a4e4d79;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+ .btn-reset {
+    background: transparent;
+     color: hsl(0, 0%, 0%); /* Изменено с #fff на #000000 для видимости */
+     border: none;
+     border-radius: 8px;
+     position: absolute;
+     right: 120px;
+     top: 60px;
+     font-size: 20px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     padding: 5px 10px;
+ }
+
+ .btn-reset:hover {
+    background-color: #4a4e4d79;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+ }
+ 
+ #btn-export {
+    background: transparent;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    position: absolute;
+    right: 80px;
+    top: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+ }
+
+ #btn-export:hover {
+    background-color: #4a4e4d79;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+ }
+ 
+ .btn-delete {
+     background: transparent;
+     color: #000000;
+     border: none;
+     border-radius: 8px;
+     position: absolute;
+     right: 40px;
+     top: 60px;
+     font-size: 20px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     padding: 5px 10px;
+ }
+     
+ .btn-delete:hover {
+    background-color: #4a4e4d79;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+ }
+ 
+ .modal {
+     display: none;
+     position: fixed;
+     z-index: 1000;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0,0,0,0.5);
+ }
+ 
+ .modal-content {
+     background-color: white;
+     margin: 10% auto;
+     padding: 0;
+     border-radius: 12px;
+     width: 90%;
+     max-width: 1000px;
+     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+     animation: modalSlideIn 0.3s ease;
+ }
+ 
+ @keyframes modalSlideIn {
+     from { 
+         transform: translateY(-50px); 
+         opacity: 0; 
+     }
+     to { 
+         transform: translateY(0); 
+         opacity: 1; 
+     }
+ }
+ 
+ .modal-header {
+     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+     padding: 15px 20px;
+     border-radius: 12px 12px 0 0;
+     border-bottom: 2px solid #0097ddd3;
+     display: flex;
+     justify-content: flex-end;
+ }
+ 
+ .modal-body {
+     padding: 20px;
+     max-height: 60vh;
+     overflow-y: auto;
+ }
+ 
+ .modal-form-group {
+     margin-bottom: 15px;
+ }
+ 
+ .modal-form-group label {
+     display: block;
+     margin-bottom: 5px;
+     font-weight: 600;
+     color: #2c3e50;
+     font-size: 0.9em;
+ }
+ 
+ .modal-form-group input,
+ .modal-form-group select { /* Добавлен селект */
+     width: 100%;
+     padding: 8px 12px;
+     border: 2px solid #e0e0e0;
+     border-radius: 6px;
+     font-size: 14px;
+     transition: all 0.3s ease;
+     color: #000000;
+     background: white; /* Исправлено с black на white */
+ }
+ 
+ .modal-form-group input:focus,
+ .modal-form-group select:focus { /* Добавлен селект */
+     outline: none;
+     border-color: #008bcc;
+     box-shadow: 0 0 0 3px rgba(0, 204, 102, 0.2);
+ }
+
+ .modal-form-row {
+     display: flex;
+     gap: 15px; /* расстояние между полями */
+ }
+
+ .modal-form-row .modal-form-group {
+     flex: 1; /* каждая группа занимает равную ширину */
+     margin-bottom: 0; /* чтобы нижний отступ не мешал */
+ }
+ 
+ .modal-footer {
+     padding: 15px 20px;
+     background: #f8f9fa;
+     border-radius: 0 0 12px 12px;
+     border-top: 1px solid #e0e0e0;
+     display: flex;
+     justify-content: flex-end;
+     gap: 10px;
+ }
+
+ .modal-section {
+    margin-bottom: 25px;
+}
+
+.modal-section-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.modal-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.modal-form-group {
+    flex: 1;
+}
+
+.modal-form-group.full {
+    flex: 100%;
+}
+ 
+ .btn-cancel {
+     padding: 8px 16px;
+     background: #6c757d;
+     color: white; /* Исправлено для читаемости */
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     font-size: 0.9em;
+ }
+ 
+ .btn-cancel:hover {
+     background: #5a6268;
+ }
+ 
+ .btn-save {
+     padding: 8px 16px;
+     background: linear-gradient(135deg, #00cc66, #009944);
+     color: white; /* Исправлено для читаемости */
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     font-size: 0.9em;
+ }
+ 
+ .btn-cancel-edit {
+     padding: 8px 16px;
+     background: #6c757d;
+     color: white; /* Исправлено для читаемости */
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     font-size: 0.9em;
+ }
+ 
+ .btn-update {
+     padding: 8px 16px;
+     background: linear-gradient(135deg, #00cc66, #009944);
+     color: white; /* Исправлено для читаемости */
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     font-size: 0.9em;
+ }
+ 
+ .btn-cancel-edit:hover {
+     background: #5a6268;
+ }
+ 
+ .btn-update:hover {
+     background: linear-gradient(135deg, #009944, #007a33);
+ }
+ 
+ .btn-save:hover {
+     background: linear-gradient(135deg, #009944, #007a33);
+ }
+ 
+ .close {
+     font-size: 1.5em;
+     cursor: pointer;
+     color: #666;
+     transition: color 0.3s ease;
+     line-height: 1;
+ }
+ 
+ .close:hover {
+     color: #333;
+ }
+ 
+ /* Стили для таблицы (добавлены отсутствующие) */
+ .modern-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+ }
+ 
+ .modern-table th,
+ .modern-table td {
+     padding: 12px;
+     text-align: left;
+     border-bottom: 1px solid #e0e0e0;
+ }
+ 
+ .modern-table th {
+     background-color: #f8f9fa;
+     font-weight: 600;
+     color: #2c3e50;
+ }
+ 
+ .actions {
+     display: flex;
+     gap: 8px;
+     justify-content: center;
+ }
+ 
+ .table-responsive {
+     overflow-x: auto;
+     margin-top: 0%; /* Добавлено для отступа под кнопками */
+ }
+ 
+@media (max-width: 768px) {
+    .container {
+        padding: 16px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+    
+    .modern-table {
+        font-size: 13px;
+        min-width: 1000px;
+    }
+
+    /* Чтобы текст в таблице на телефоне не "налезал" друг на друга */
+    #subscribers-table,
+    #subscribers-table th,
+    #subscribers-table td {
+        line-height: 1.25;
+    }
+
+    #subscribers-table td,
+    #subscribers-table th {
+        white-space: normal !important; /* перебить возможный nowrap от DataTables/Bootstrap */
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+    
+    .modern-table th,
+    .modern-table td {
+        padding: 12px 8px;
+        font-size: 0.8em;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .btn-edit, .btn-delete, .btn-view {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .user-info strong,
+    .user-login {
+        max-width: 120px;
+    }
+    
+    .modern-table td {
+        max-width: 150px;
+    }
+    
+    /* Адаптивные стили для модального окна на мобильных */
+    .modal-content {
+        margin: 5% auto;
+        width: 95%;
+        max-width: 350px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+        max-height: 70vh; /* Увеличено для мобильных */
+    }
+   
+    .modal-header {
+        padding: 12px 15px;
+    }
+    
+    .modal-footer {
+        padding: 12px 15px;
+        flex-direction: column;
+    }
+    
+    .btn-cancel, .btn-save {
+        width: 100%;
+    }
+    
+    /* Кнопки в мобильной версии */
+    .btn-success, .btn-add {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px 5px;
+    }
+    
+    .logo {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 20px;
+    }
+ }
+ 
+
+ #subscribers-table tbody tr {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+.table-hint {
+    text-align: center;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #6c757d;
+}
+ 
+ 
+ /* Дополнительные исправления для лучшего отображения */
+.modal-form-group select {
+     background: white; /* Исправлено с black на white */
+     color: #000000;
+     cursor: pointer;
+}
+ 
+.modal-form-group select option {
+     background: white;
+     color: #000000;
+}
+
+.status-working {
+    color: #155724;
+    background-color: #d4edda;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.status-broken {
+    color: #721c24;
+    background-color: #f8d7da;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.status-zip {
+    color: #856404;
+    background-color: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.inline-edit-input {
+    width: 100%;           /* Занимает всю ширину ячейки */
+    box-sizing: border-box; /* Чтобы padding не ломал ширину */
+    padding: 2px 6px;       /* Внутренний отступ */
+    font-size: 13px;        /* Размер шрифта, как в таблице */
+    border: 1px solid #ced4da; /* Стандартная рамка */
+    border-radius: 4px;     /* Скругление углов */
+    background-color: #fff; /* Белый фон */
+    color: #212529;         /* Цвет текста */
+    font-weight: 500;       /* Немного жирнее для читабельности */
+}
+
+.inline-edit-input:focus {
+    outline: none;
+    border-color: #0ae641;  /* Голубая рамка при фокусе */
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+    background-color: #fff;
+}
+
+.inline-edit-input option {
+    padding: 2px 6px;       /* Внутренний отступ в опциях */
+}
+
+body.dark-mode {
+    background-color: #111827;
+    color: #e5e7eb;
+}
+
+body.dark-mode table {
+    background-color: #1f2937;
+    color: #e5e7eb;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #374151;
+}
+
+body.dark-mode .card,
+body.dark-mode .container {
+    background-color: #1f2937;
+}
+
+body.dark-mode a {
+    color: #60a5fa;
+}
+
+body.dark-mode {
+    background-color: #111827 !important;
+    color: #e5e7eb !important;
+}
+
+/* Таблицы DataTables */
+body.dark-mode table.dataTable {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
+    border-color: #374151 !important;
+}
+
+body.dark-mode table.dataTable th,
+body.dark-mode table.dataTable td {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
+    border-bottom: 1px solid #374151 !important;
+}
+
+/* Шапка таблицы */
+body.dark-mode table.dataTable thead th {
+    background-color: #111827 !important;
+    color: #e5e7eb !important;
+}
+
+/* Тёмная шапка */
+body.dark-mode .top-header,
+body.dark-mode #userMenuButton,
+body.dark-mode #userDropdown {
+    background: #1f2937; /* тёмный фон */
+    color: #f3f4f6;      /* светлый текст */
+    border-color: #4b5563; /* если есть границы */
+}
+
+/* Фильтры и селекты DataTables */
+body.dark-mode .dataTables_filter input,
+body.dark-mode .dataTables_length select {
+    background-color: #374151 !important;
+    color: #e5e7eb !important;
+    border: 1px solid #555 !important;
+}
+
+/* Модалки */
+body.dark-mode .modal-content {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
+}
+
+/* Выпадающее меню пользователя */
+body.dark-mode #userDropdown {
+    background-color: #1f2937 !important;
+    color: white !important;
+}
+
+/* Плавающие кнопки и hover */
+body.dark-mode button,
+body.dark-mode .btn {
+    background-color: #374151 !important;
+    color: #e5e7eb !important;
+}
+body.dark-mode button:hover,
+body.dark-mode .btn:hover {
+    background-color: #4b5563 !important;
+}
+
+table.dataTable thead .dt-column-order {
+    display: none !important;
+}
+
+table.dataTable thead th {
+    padding-right: 8px !important;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 20px;
+    width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 9999;
+
+    display: none;
+    animation: fadeIn 0.2s ease;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.filter-field label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.filter-field input {
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.filter-field input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.filter-dropdown button {
+    margin-top: 10px;
+    width: 48%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.filter-dropdown button[type="submit"] {
+    background: #3498db;
+    color: #fff;
+}
+
+.filter-dropdown button[type="submit"]:hover {
+    background: #2980b9;
+}
+
+#filterResetBtn {
+    background: #eee;
+}
+
+#filterResetBtn:hover {
+    background: #ddd;
+}
+
+/* Кнопки в ряд */
+.filter-dropdown form + button,
+.filter-dropdown button + button {
+    display: inline-block;
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

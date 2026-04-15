@@ -1,0 +1,210 @@
+/* ===== БАЗА ===== */
+
+:root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #1f2937;
+    --border: #e5e7eb;
+    --primary: #2563eb;
+    --danger: #dc2626;
+    --success: #16a34a;
+}
+
+body.dark {
+    --bg: #111827;
+    --card: #1f2937;
+    --text: #f3f4f6;
+    --border: #374151;
+    --primary: #3b82f6;
+    --danger: #ef4444;
+    --success: #22c55e;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: 0.2s;
+}
+
+/* ===== HEADER ===== */
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.top-header button {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.top-header button:hover {
+    opacity: 0.9;
+}
+
+/* ===== КОНТЕЙНЕР ===== */
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ===== КАРТОЧКА ===== */
+
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+/* ===== ФОРМА ===== */
+
+input, select {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+button.primary {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button.success {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button.danger {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/* ===== USERS TABLE STYLE ===== */
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--card);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.users-table thead {
+    background: var(--bg);
+}
+
+.users-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+}
+
+.users-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.users-table tbody tr {
+    transition: 0.15s;
+}
+
+.users-table tbody tr:hover {
+    background: rgba(0,0,0,0.03);
+}
+
+body.dark .users-table tbody tr:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.users-table td.editable {
+    cursor: pointer;
+}
+
+.users-table td.editable:hover {
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.btn-delete {
+    background: var(--danger);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    opacity: 0.85;
+}
+
+/* ===== КНОПКА НАЗАД / НА ГЛАВНУЮ ===== */
+
+.btn-home {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--primary);
+    color: white;
+    transition: 0.2s;
+}
+
+.btn-home:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.btn-home.secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-home.secondary:hover {
+    background: var(--border);
+}
