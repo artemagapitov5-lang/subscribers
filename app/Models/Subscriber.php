@@ -11,7 +11,7 @@ class Subscriber extends Model
 
     // Указываем, какие поля можно массово заполнять
     protected $fillable = [
-        'fio', 'city', 'address', 'service', 'login', 'number', 'ip', 'password', 'band', 'cabinet1', 'cabinet2',
+        'fio', 'city', 'address', 'service', 'technology', 'login', 'number', 'ip', 'password', 'band', 'cabinet1', 'cabinet2',
         'switch_address', 'port', 'active', 'note', 'date',
     ];
 

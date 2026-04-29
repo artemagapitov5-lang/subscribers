@@ -222,6 +222,14 @@
                     <th>Телефон</th>
                     <th>IP оборудования</th>
                     <th>Пароль</th>
+                    <th>Гром Полоса</th>
+                    <th>Шкаф 1</th>
+                    <th>Шкаф 2</th>
+                    <th>Коммутатор</th>
+                    <th>Порт</th>
+                    <th>Статус</th>
+                    <th>Примечание</th>
+                    <th>Дата подключения</th>
                 </tr>
                 </thead>
                 <tbody></tbody>
@@ -380,6 +388,10 @@
                     <div class="modal-form-group">
                         <label for="sub-service">Услуга</label>
                         <input type="text" id="sub-service" name="service" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-technology">Технология</label>
+                        <input type="text" id="sub-technology" name="technology">
                     </div>
                 </div>
                 <div class="modal-form-row">
@@ -612,8 +624,9 @@ $(document).ready(function () {
 
     // Приведение значения "активен/неактивен" между БД (1/0) и UI (текст)
     function normalizeActiveValue(val) {
-        if (val === 1 || val === '1' || val === true || val === 'true' || val === 'Активен') return 1;
-        if (val === 0 || val === '0' || val === false || val === 'false' || val === 'Неактивен') return 0;
+        // Возвращаем строку, чтобы совпадать с валидацией Laravel (nullable|string)
+        if (val === 1 || val === '1' || val === true || val === 'true' || val === 'Активен') return '1';
+        if (val === 0 || val === '0' || val === false || val === 'false' || val === 'Неактивен') return '0';
         return val;
     }
 
@@ -632,6 +645,7 @@ $(document).ready(function () {
         'city': 'Город/Станция',
         'address': 'Адрес',
         'service': 'Услуга',
+        'technology': 'Технология',
         'login': 'Логин',
         'number': 'Телефон',
         'ip': 'IP адрес',
@@ -758,16 +772,26 @@ $(document).ready(function () {
             { data: 'address', orderable: true, searchable: true },
             { data: 'service', orderable: true, searchable: true },
             { data: 'technology', orderable: true, searchable: true },
-            { data: 'login', orderable: true, searchable: true },
+            { data: 'login', orderable: true, searchable: true, visible: false },
             { data: 'number', orderable: true, searchable: true },
             { data: 'ip', orderable: true, searchable: true },
-            { data: 'password', orderable: true, searchable: true },
+            { data: 'password', orderable: true, searchable: true, visible: false },
             { data: 'band', name: 'band', visible: false },
             { data: 'cabinet1', name: 'cabinet1', visible: false },
             { data: 'cabinet2', name: 'cabinet2', visible: false },
             { data: 'switch_address', name: 'switch_address', visible: false },
-            { data: 'port', name: 'port', visible: false },
-            { data: 'active', name: 'active', visible: false },
+            { data: 'port', name: 'port', visible: true },
+            {
+                data: 'active',
+                name: 'active',
+                visible: true,
+                render: function (data) {
+                    const isActive = normalizeActiveValue(data) == '1';
+                    const label = isActive ? 'Активен' : 'Неактивен';
+                    const color = isActive ? '#16a34a' : '#dc2626';
+                    return '<span style="color:' + color + '; font-weight:600;">' + label + '</span>';
+                }
+            },
             { data: 'note', name: 'note', visible: false },
             { data: 'date', name: 'date', visible: false }
         ],
@@ -988,7 +1012,7 @@ $(document).ready(function () {
 
     } catch(err) {
         console.error(err);
-        alert('Ошибка при сохранении!');
+        alert('Ошибка при сохранении: ' + (err?.message || err));
     }
 
     });
