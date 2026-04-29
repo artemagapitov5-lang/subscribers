@@ -169,6 +169,7 @@ class SubscriberController extends Controller
             'city',
             'address',
             'service',
+            'technology',
             'login',
             'number',
             'ip',

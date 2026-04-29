@@ -217,6 +217,7 @@
                     <th>Город/Станция</th>
                     <th>Адрес</th>
                     <th>Услуга</th>
+                    <th>Технология</th>
                     <th>Логин</th>
                     <th>Телефон</th>
                     <th>IP оборудования</th>
@@ -609,6 +610,17 @@ $(document).ready(function () {
         nowork: 'не работает'
     };
 
+    // Приведение значения "активен/неактивен" между БД (1/0) и UI (текст)
+    function normalizeActiveValue(val) {
+        if (val === 1 || val === '1' || val === true || val === 'true' || val === 'Активен') return 1;
+        if (val === 0 || val === '0' || val === false || val === 'false' || val === 'Неактивен') return 0;
+        return val;
+    }
+
+    function activeValueToLabel(val) {
+        return normalizeActiveValue(val) == 1 ? 'Активен' : 'Неактивен';
+    }
+
     const managers = [
         'Уленты', 'Бозшаколь', 'Чидерты', 'ОП-116', 'Екибастуз',
         'Атыгай', 'Майкаин', 'Токубай', 'Карасор', 'Калкаман',
@@ -745,6 +757,7 @@ $(document).ready(function () {
             { data: 'city', orderable: true, searchable: true },
             { data: 'address', orderable: true, searchable: true },
             { data: 'service', orderable: true, searchable: true },
+            { data: 'technology', orderable: true, searchable: true },
             { data: 'login', orderable: true, searchable: true },
             { data: 'number', orderable: true, searchable: true },
             { data: 'ip', orderable: true, searchable: true },
@@ -845,7 +858,7 @@ $(document).ready(function () {
     });
 
     // Закрытие модалок
-    $('.close, .btn-cancel').on('click', function () {
+    $('.close, .btn-cancel, .btn-close').on('click', function () {
         const $modal = $(this).closest('.modal');
         $modal.hide();
         const form = $modal.find('form')[0];
@@ -878,6 +891,8 @@ $(document).ready(function () {
 
         Object.keys(fieldLabels).forEach(field => {
 
+            let value = data[field] ?? '';
+
             if (i % 3 === 0) {
                 row = $('<div class="modal-form-row"></div>');
                 $body.append(row);
@@ -887,12 +902,24 @@ $(document).ready(function () {
 
             group.append(`<label>${fieldLabels[field]}</label>`);
 
-            group.append(`
-                <input type="text"
-                    value="${data[field] ?? ''}"
-                    class="modal-input"
-                    data-field="${field}">
-            `);
+            if (field === 'active') {
+                const activeNumeric = normalizeActiveValue(value);
+                group.append(`
+                    <select
+                        class="modal-input"
+                        data-field="${field}">
+                        <option value="1" ${activeNumeric == 1 ? 'selected' : ''}>Активен</option>
+                        <option value="0" ${activeNumeric != 1 ? 'selected' : ''}>Неактивен</option>
+                    </select>
+                `);
+            } else {
+                group.append(`
+                    <input type="text"
+                        value="${value}"
+                        class="modal-input"
+                        data-field="${field}">
+                `);
+            }
 
             row.append(group);
 
@@ -908,7 +935,8 @@ $(document).ready(function () {
     $(document).on('change', '.modal-input', function() {
         const input = $(this);
         const field = input.data('field');
-        const value = input.val();
+        let value = input.val();
+        if (field === 'active') value = normalizeActiveValue(value);
         const id = $('#subscriberModal').data('id');
 
         fetch('/subscribers/' + id, {
@@ -935,7 +963,9 @@ $(document).ready(function () {
 
     $inputs.each(function() {
         const field = $(this).data('field');
-        payload[field] = $(this).val();
+        let value = $(this).val();
+        if (field === 'active') value = normalizeActiveValue(value);
+        payload[field] = value;
     });
 
     try {
