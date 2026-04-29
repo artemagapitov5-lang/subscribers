@@ -361,38 +361,101 @@
         <div class="modal-body">
             <form id="addSubscriberForm">
                 @csrf
-                <div class="modal-form-group">
-                    <label for="sub-fio">ФИО</label>
-                    <input type="text" id="sub-fio" name="fio" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-fio">ФИО</label>
+                        <input type="text" id="sub-fio" name="fio" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-city">Город</label>
+                        <input type="text" id="sub-city" name="city" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-city">Город</label>
-                    <input type="text" id="sub-city" name="city" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-address">Адрес</label>
+                        <input type="text" id="sub-address" name="address" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-service">Услуга</label>
+                        <input type="text" id="sub-service" name="service" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-address">Адрес</label>
-                    <input type="text" id="sub-address" name="address" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-login">Логин</label>
+                        <input type="text" id="sub-login" name="login" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-number">Телефон</label>
+                        <input type="text" id="sub-number" name="number" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-service">Услуга</label>
-                    <input type="text" id="sub-service" name="service" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-ip">IP оборудования</label>
+                        <input type="text" id="sub-ip" name="ip" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-password">Пароль</label>
+                        <input type="text" id="sub-password" name="password" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-login">Логин</label>
-                    <input type="text" id="sub-login" name="login" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-band">Гром Полоса</label>
+                        <input type="text" id="sub-band" name="band" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-cabinet1">Шкаф 1</label>
+                        <input type="text" id="sub-cabinet1" name="cabinet1" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-cabinet2">Шкаф 2</label>
+                        <input type="text" id="sub-cabinet2" name="cabinet2" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-number">Телефон</label>
-                    <input type="text" id="sub-number" name="number" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-switch-address">Адрес Комутатора</label>
+                        <input type="text" id="sub-switch-address" name="switch_address" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-port">Порт</label>
+                        <input type="text" id="sub-port" name="port" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-ip">IP оборудования</label>
-                    <input type="text" id="sub-ip" name="ip" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="sub-active">Активен</label>
+                        <select id="sub-active" name="active">
+                            <option value="1">Активен</option>
+                            <option value="0">Неактивен</option>
+                        </select>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="sub-note">Примечание</label>
+                        <input type="text" id="sub-note" name="note" required>
+                    </div>
                 </div>
-                <div class="modal-form-group">
-                    <label for="sub-password">Пароль</label>
-                    <input type="text" id="sub-password" name="password" required>
+                <div class="modal-form-row">
+                    <div class="modal-form-group">
+                        <label for="subscriber-date">Дата подключения</label>
+                        <input type="date" id="subscriber-date" name="date" required>
+                    </div>
                 </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-cancel" data-close="addSubscribersModal">Отмена</button>
+            <button type="button" class="btn-save" id="saveSubscriber">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+{{-- Модалка: network --}}
+<div id="addNetworkModal" class="modal">
+    <div class="modal-content">
                 <div class="modal-form-group">
                     <label for="sub-band">Гром Полоса</label>
                     <input type="text" id="sub-band" name="band" required>

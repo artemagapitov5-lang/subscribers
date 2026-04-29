@@ -54,5 +54,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/table', [App\Http\Controllers\TableColumnController::class, 'index'])->name('table.columns');
     Route::post('/table/save', [App\Http\Controllers\TableColumnController::class, 'save'])->name('table.columns.save');
     Route::get('/table/data', [App\Http\Controllers\TableColumnController::class, 'data'])->name('table.columns.data');
+
+    Route::get('/system/logs', function () {
+
+        $path = '/var/log/syslog'; // можно заменить
+    
+        if (!file_exists($path)) {
+            return response()->json(['logs' => ['log file not found']]);
+        }
+    
+        $lines = array_slice(file($path), -50); // последние 50 строк
+    
+        return response()->json([
+            'logs' => array_reverse($lines)
+        ]);
+    });
 });
 
